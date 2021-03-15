@@ -59,19 +59,16 @@ class CartItem extends React.Component{
         
         //method 2
 
-        this.setState((prevState)=>{
+        let { qty } = this.state;
 
-            if(prevState.qty < 1){
-                return
-            }
-            
+        if(qty === 0){
+            return;
+        }
+
+        this.setState((prevState)=>{
             return {
                     qty : prevState.qty - 1
-            }
-
-           
-
-           
+            }  
         })
 
     }
