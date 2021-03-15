@@ -23,12 +23,57 @@ class CartItem extends React.Component{
     //case 3 best , use arrow func in class t share this
     increaseQuantity = ()=>{
 
-      console.log("increased");
+        //method1
+        
+        //if we just do this.state.qty++ it will just manipulate the tate oobject but wont actially change anything fo the component
+        //so to re rednder the component we us setState function to make changes
+        //what we do here is we pass an object to the set state functiona and based on the passed 
+        //object it performs shallow merging on the state , i.e. merge the changes to the qty only and not the whole state
+        //we use this method when we dont need the previos state
+        
+        // this.setState({
+        //     qty : this.state.qty+1    
+        // })
+        
+        //method 2 
+        
+        //here we passa function to the set state function and the argumnet will carry the previes state of the componente
+        //this is to be used when we require the previoes state
+        this.setState((prevState)=>{
+            
+            return {
+                qty : prevState.qty + 1
+            }
+
+        })
+      
 
     }
 
     dicreaseQuantity = ()=>{
-        console.log(this.state);
+        //method 
+        
+        // this.setState({
+        //     qty : this.state.qty-1    
+        // })
+        
+        //method 2
+
+        this.setState((prevState)=>{
+
+            if(prevState.qty < 1){
+                return
+            }
+            
+            return {
+                    qty : prevState.qty - 1
+            }
+
+           
+
+           
+        })
+
     }
 
     render(){
