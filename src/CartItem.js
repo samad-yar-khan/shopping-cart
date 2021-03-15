@@ -9,6 +9,26 @@ class CartItem extends React.Component{
             price : 1000 ,
             qty : 2
         }
+
+        //method 2 , we bind our functions to this (otherwise their 'this' value wull be uundefined when they are assigned to an event listenr or aany other var)
+        // this.increaseQuantity = this.increaseQuantity.bind(this);
+    }
+    //here we used arrow dunction because they dont have  theri own binding to this and use this of the object which are linked to
+    //if we used simple functions then we would have needed to bind them to this while assigning iit to the event listener
+    //for case 1 and 2
+    // increaseQuantity = function(){
+    //     console.log(this); //this 'this' will be undefined unless we bind it at the time of assignin to event listtener or assign it in the constructor
+
+    // } 
+    //case 3 best , use arrow func in class t share this
+    increaseQuantity = ()=>{
+
+      console.log("increased");
+
+    }
+
+    dicreaseQuantity = ()=>{
+        console.log(this.state);
     }
 
     render(){
@@ -24,9 +44,24 @@ class CartItem extends React.Component{
                     <div style = { { color : '#777' } }>QTY {qty}</div>
                     <div className='cart-item-actions'>
                         {/* Buttons */}
-                        <img alt = 'increase' className='action-icons' src='https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1615675046~hmac=2d2f91b997c9e9b9aeb360cd97be5a15' />
-                        <img alt = 'decrease' className='action-icons' src='https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1615675079~hmac=f06388951cb8573d4347487043540fe7' />
-                        <img alt = 'delete' className='action-icons' src='https://www.flaticon.com/svg/vstatic/svg/3096/3096673.svg?token=exp=1615674957~hmac=771ac488c89fe34832cff287246beab1' />
+                        <img 
+                            alt = 'increase' 
+                            className='action-icons' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1615675046~hmac=2d2f91b997c9e9b9aeb360cd97be5a15' 
+                            onClick = {this.increaseQuantity}
+                            // onClick = {this.increaseQuantity.bind(this)} //method 1 bind the  this while passing a value of a func to an event llistner oor even anotehr variable so it can use the this of the linked object
+                        />
+                        <img 
+                            alt = 'decrease' 
+                            className='action-icons' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1615675079~hmac=f06388951cb8573d4347487043540fe7' 
+                            onClick = {this.dicreaseQuantity}
+                        />
+                        <img 
+                            alt = 'delete' 
+                            className='action-icons' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/3096/3096673.svg?token=exp=1615674957~hmac=771ac488c89fe34832cff287246beab1' 
+                        />
 
                     
                     </div>
