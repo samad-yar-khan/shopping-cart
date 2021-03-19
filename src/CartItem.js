@@ -7,7 +7,7 @@ class CartItem extends React.Component{
         this.state = {
             title : 'phone',
             price : 1000 ,
-            qty : 2
+            qty : 0
         }
 
         //method 2 , we bind our functions to this (otherwise their 'this' value wull be uundefined when they are assigned to an event listenr or aany other var)
@@ -25,7 +25,7 @@ class CartItem extends React.Component{
 
         //method1
         
-        //if we just do this.state.qty++ it will just manipulate the tate oobject but wont actially change anything fo the component
+        //if we just do this.state.qty++ it will just manipulate the state oobject but wont actially change anything fo the component
         //so to re rednder the component we us setState function to make changes
         //what we do here is we pass an object to the set state functiona and based on the passed 
         //object it performs shallow merging on the state , i.e. merge the changes to the qty only and not the whole state
@@ -34,6 +34,7 @@ class CartItem extends React.Component{
         // this.setState({
         //     qty : this.state.qty+1    
         // })
+     
         
         //method 2 
         
@@ -45,7 +46,8 @@ class CartItem extends React.Component{
                 qty : prevState.qty + 1
             }
 
-        })
+        });
+       
       
 
     }
@@ -75,6 +77,7 @@ class CartItem extends React.Component{
 
     render(){
         let {title , price , qty } = this.state;  //object destructuring 
+        console.log("render");
         return(
             <div className='cart-item'>
                 <div className='left-block'>
@@ -87,22 +90,23 @@ class CartItem extends React.Component{
                     <div className='cart-item-actions'>
                         {/* Buttons */}
                         <img 
-                            alt = 'increase' 
+                           
+                           alt = 'increase' 
                             className='action-icons' 
-                            src='https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1615675046~hmac=2d2f91b997c9e9b9aeb360cd97be5a15' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/1828/1828926.svg?token=exp=1616191910~hmac=ec6306f5df77f7f7279c30a1f7535a30' 
                             onClick = {this.increaseQuantity}
                             // onClick = {this.increaseQuantity.bind(this)} //method 1 bind the  this while passing a value of a func to an event llistner oor even anotehr variable so it can use the this of the linked object
                         />
                         <img 
                             alt = 'decrease' 
                             className='action-icons' 
-                            src='https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1615675079~hmac=f06388951cb8573d4347487043540fe7' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1616191996~hmac=ba7771aa50a733204f9e5e6fedaf656e' 
                             onClick = {this.dicreaseQuantity}
                         />
                         <img 
                             alt = 'delete' 
                             className='action-icons' 
-                            src='https://www.flaticon.com/svg/vstatic/svg/3096/3096673.svg?token=exp=1615674957~hmac=771ac488c89fe34832cff287246beab1' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/1214/1214428.svg?token=exp=1616192026~hmac=85f31ef6ee99b4fa21b952da67902f26' 
                         />
 
                     
