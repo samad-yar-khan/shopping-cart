@@ -13,15 +13,18 @@ class Cart extends React.Component{
                     title : 'Phone',
                     price : 10000 ,
                     qty : 0,
+                    id : 1
                 },
                 {
                     title : 'Laptop',
                     price : 200000 ,
-                    qty : 0
+                    qty : 0,
+                    id : 2
                 }, {
                     title : 'Pen',
                     price : 10 ,
-                    qty : 0
+                    qty : 0,
+                    id : 3
                 }
                 
             ]
@@ -44,7 +47,7 @@ class Cart extends React.Component{
         <div className="cart">
             
             {products.map((product)=>{
-                return  <CartItem product={product} />
+                return  <CartItem product={product} key={product.id} />
             })}
          
            
@@ -56,3 +59,4 @@ class Cart extends React.Component{
 }
 
 export default Cart;
+//each elemnt created shoud have a unique ideniification key so react can differntiate beetweem two produts easiity
