@@ -2,17 +2,17 @@ import React from 'react'
 
 class CartItem extends React.Component{
 
-    constructor(){
-        super(); //must call parents constructor first 
-        this.state = {
-            title : 'phone',
-            price : 1000 ,
-            qty : 0
-        }
+    // constructor(){
+    //     super(); //must call parents constructor first 
+    //     this.state = {
+    //         title : 'phone',
+    //         price : 1000 ,
+    //         qty : 0
+    //     }
 
-        //method 2 , we bind our functions to this (otherwise their 'this' value wull be uundefined when they are assigned to an event listenr or aany other var)
-        // this.increaseQuantity = this.increaseQuantity.bind(this);
-    }
+    //     //method 2 , we bind our functions to this (otherwise their 'this' value wull be uundefined when they are assigned to an event listenr or aany other var)
+    //     // this.increaseQuantity = this.increaseQuantity.bind(this);
+    // }
     //here we used arrow dunction because they dont have  theri own binding to this and use this of the object which are linked to
     //if we used simple functions then we would have needed to bind them to this while assigning iit to the event listener
     //for case 1 and 2
@@ -61,7 +61,7 @@ class CartItem extends React.Component{
         
         //method 2
 
-        let { qty } = this.state;
+        let { qty } = this.state.qty;
 
         if(qty === 0){
             return;
@@ -76,7 +76,7 @@ class CartItem extends React.Component{
     }
 
     render(){
-        let {title , price , qty } = this.state;  //object destructuring 
+        let {title , price , qty } = this.props.product;  //object destructuring 
         console.log("render");
         return(
             <div className='cart-item'>
