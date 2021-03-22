@@ -62,6 +62,16 @@ class Cart extends React.Component{
        }
        return;
     }
+
+    handleDeleteProduct = (id)=>{
+        
+        let {products} = this.state;
+        let  items = products.filter((item)=> item.id !== id); //this will basically filter out all those items whose id is not equal to the id of the item to be deleted
+
+        this.setState({
+            products : items
+        })
+    }
     
     render(){
 
@@ -76,6 +86,7 @@ class Cart extends React.Component{
                             key={product.id} 
                             increaseQuantity = {this.handleIncreaseQuantity}
                             dicreaseQuantity = {this.handleDicreaseQuantity}
+                            deleteItem = {this.handleDeleteProduct}
                         />
             })}
       
