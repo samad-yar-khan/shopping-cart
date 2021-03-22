@@ -35,26 +35,53 @@ class Cart extends React.Component{
         //method 2 , we bind our functions to this (otherwise their 'this' value wull be uundefined when they are assigned to an event listenr or aany other var)
         // this.increaseQuantity = this.increaseQuantity.bind(this);
     }
+
+    handleIncreaseQuantity = (product)=>{
+
+        let {products} = this.state;
+        let index = products.indexOf(product);
+        // console.log(product);
+        products[index].qty+=1;
+
+        this.setState({
+            products:products
+        });
+
+    }
+
+    handleDicreaseQuantity = (product)=>{
+
+        let {products} = this.state;
+        let index = products.indexOf(product);
+        // console.log(product);
+       if(products[index].qty > 0){
+           products[index].qty -=1;
+           this.setState({
+            products:products
+        });
+       }
+       return;
+    }
     
     render(){
 
         const {products} = this.state;
-       
         return(
-
-        
 
         <div className="cart">
             
             {products.map((product)=>{
-                return  <CartItem product={product} key={product.id} />
+                return  <CartItem 
+                            product={product} 
+                            key={product.id} 
+                            increaseQuantity = {this.handleIncreaseQuantity}
+                            dicreaseQuantity = {this.handleDicreaseQuantity}
+                        />
             })}
-         
-           
-            
+      
         </div>
         )
-    }z
+    }
 
 }
 

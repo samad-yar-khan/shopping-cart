@@ -76,7 +76,7 @@ class CartItem extends React.Component{
     }
 
     render(){
-        let {title , price , qty } = this.props.product;  //object destructuring 
+        let {title , price , qty,id } = this.props.product;  //object destructuring 
         console.log("render");
         return(
             <div className='cart-item'>
@@ -94,14 +94,14 @@ class CartItem extends React.Component{
                            alt = 'increase' 
                             className='action-icons' 
                             src='https://www.flaticon.com/svg/vstatic/svg/1828/1828926.svg?token=exp=1616191910~hmac=ec6306f5df77f7f7279c30a1f7535a30' 
-                            onClick = {this.increaseQuantity}
+                            onClick = {()=>{ this.props.increaseQuantity(this.props.product)}}
                             // onClick = {this.increaseQuantity.bind(this)} //method 1 bind the  this while passing a value of a func to an event llistner oor even anotehr variable so it can use the this of the linked object
                         />
                         <img 
                             alt = 'decrease' 
                             className='action-icons' 
                             src='https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1616191996~hmac=ba7771aa50a733204f9e5e6fedaf656e' 
-                            onClick = {this.dicreaseQuantity}
+                            onClick = {()=>{ this.props.dicreaseQuantity(this.props.product)}}
                         />
                         <img 
                             alt = 'delete' 
