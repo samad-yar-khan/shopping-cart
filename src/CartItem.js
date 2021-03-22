@@ -1,86 +1,13 @@
 import React from 'react' 
 
-class CartItem extends React.Component{
+const CartItem  = (props)=>{
 
-    // constructor(){
-    //     super(); //must call parents constructor first 
-    //     this.state = {
-    //         title : 'phone',
-    //         price : 1000 ,
-    //         qty : 0
-    //     }
 
-    //     //method 2 , we bind our functions to this (otherwise their 'this' value wull be uundefined when they are assigned to an event listenr or aany other var)
-    //     // this.increaseQuantity = this.increaseQuantity.bind(this);
-    // }
-    //here we used arrow dunction because they dont have  theri own binding to this and use this of the object which are linked to
-    //if we used simple functions then we would have needed to bind them to this while assigning iit to the event listener
-    //for case 1 and 2
-    // increaseQuantity = function(){
-    //     console.log(this); //this 'this' will be undefined unless we bind it at the time of assignin to event listtener or assign it in the constructor
-
-    // } 
-    //case 3 best , use arrow func in class t share this
-    increaseQuantity = ()=>{
-
-        //method1
-        
-        //if we just do this.state.qty++ it will just manipulate the state oobject but wont actially change anything fo the component
-        //so to re rednder the component we us setState function to make changes
-        //what we do here is we pass an object to the set state functiona and based on the passed 
-        //object it performs shallow merging on the state , i.e. merge the changes to the qty only and not the whole state
-        //we use this method when we dont need the previos state
-        
-        // this.setState({
-        //     qty : this.state.qty+1    
-        // })
-     
-        
-        //method 2 
-        
-        //here we passa function to the set state function and the argumnet will carry the previes state of the componente
-        //this is to be used when we require the previoes state
-        this.setState((prevState)=>{
-            
-            return {
-                qty : prevState.qty + 1
-            }
-
-        });
-       
-      
-
-    }
-
-    dicreaseQuantity = ()=>{
-        //method 
-        
-        // this.setState({
-        //     qty : this.state.qty-1    
-        // })
-        
-        //method 2
-
-        let { qty } = this.state.qty;
-
-        if(qty === 0){
-            return;
-        }
-
-        this.setState((prevState)=>{
-            return {
-                    qty : prevState.qty - 1
-            }  
-        })
-
-    }
-
-    render(){
-        let {title , price , qty,id } = this.props.product;  //object destructuring 
+        let {title , price , qty,id } = props.product;  //object destructuring 
         let {product , 
             increaseQuantity , 
             dicreaseQuantity , 
-            deleteItem} = this.props;
+            deleteItem} = props;
         // console.log("render");
         return(
             <div className='cart-item'>
@@ -119,8 +46,7 @@ class CartItem extends React.Component{
                 </div>
             </div>
         )
-    }
-
+    
 }
 
 //we must export the ccomponent and import it in our app file 
