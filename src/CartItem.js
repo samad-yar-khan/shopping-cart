@@ -24,20 +24,20 @@ const CartItem  = (props)=>{
                            
                            alt = 'increase' 
                             className='action-icons' 
-                            src='https://www.flaticon.com/svg/vstatic/svg/1828/1828926.svg?token=exp=1616429613~hmac=30c02061f4cb06489fc0530ab432e73e' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1616931622~hmac=30486315acdb65fc85315855d8b97306' 
                             onClick = {()=>{increaseQuantity(product)}}
                             // onClick = {this.increaseQuantity.bind(this)} //method 1 bind the  this while passing a value of a func to an event llistner oor even anotehr variable so it can use the this of the linked object
                         />
                         <img 
                             alt = 'decrease' 
                             className='action-icons' 
-                            src='https://www.flaticon.com/svg/vstatic/svg/1828/1828906.svg?token=exp=1616429578~hmac=4530135522df9c0e6957869493765ae0' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/659/659892.svg?token=exp=1616931664~hmac=95e2192a64272e2edef684867352939e' 
                             onClick = {()=>{ dicreaseQuantity(product)}}
                         />
                         <img 
                             alt = 'delete' 
                             className='action-icons' 
-                            src='https://www.flaticon.com/svg/vstatic/svg/1214/1214428.svg?token=exp=1616429139~hmac=e8a9d3f99cb1df05040abfed68510646' 
+                            src='https://www.flaticon.com/svg/vstatic/svg/1214/1214428.svg?token=exp=1616931704~hmac=0195b9f432ada021e512fa4072c7f4e3' 
                             onClick = {()=>{ deleteItem(product.id)}}
                         />
 
