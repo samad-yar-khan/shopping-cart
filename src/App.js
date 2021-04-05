@@ -2,6 +2,7 @@
 import React from 'react' 
 import Cart from './Cart'
 import NavBar from './NavBar'
+import firebase from 'firebase/app';
 
 class App extends React.Component {
 
@@ -9,32 +10,41 @@ class App extends React.Component {
       super(); //must call parents constructor first 
       this.state = {
           
-          products : [//array of products
-              {
-                  title : 'Phone',
-                  price : 10000 ,
-                  qty : 0,
-                  id : 1
-              },
-              {
-                  title : 'Laptop',
-                  price : 200000 ,
-                  qty : 0,
-                  id : 2
-              }, {
-                  title : 'Pen',
-                  price : 10 ,
-                  qty : 0,
-                  id : 3
-              }
-              
-          ]
+          products : [],
+          loading : true
           
       }
 
 
       //method 2 , we bind our functions to this (otherwise their 'this' value wull be uundefined when they are assigned to an event listenr or aany other var)
       // this.increaseQuantity = this.increaseQuantity.bind(this);
+  }
+
+  componentDidMount(){
+    firebase
+      .firestore()
+      .collection('products')
+      .get()//this returns me a promise
+      .then((snapshot)=>{
+       
+        
+        //what we do now is that we fecth data from the firebase and set state here
+
+        const products = snapshot.docs.map((doc)=>{
+
+          let product = doc.data(); //will set all data for a product except the product id
+          product['id'] = doc.id;
+
+          return product;
+        })
+
+        this.setState({
+          products :products,
+          loading : false
+        })
+       
+      })
+
   }
 
   handleIncreaseQuantity = (product)=>{
@@ -96,7 +106,7 @@ class App extends React.Component {
 
     render(){
 
-      let products = this.state;
+      const products  = this.state;
 
       return (
         <div className="App">
@@ -109,9 +119,10 @@ class App extends React.Component {
             dicreaseQuantity = {this.handleDicreaseQuantity}
             deleteItem = {this.handleDeleteProduct}
           />
+          {this.state.loading && <h1>Loading....</h1>}
           <div>
             <h2 style = {{color:'blue' , marginLeft:10 , padding:5}}>CART TOTAL : {this.getCartTotal()}</h2>
-          </div>
+          </div>          
         </div>
        
       );

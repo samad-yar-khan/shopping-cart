@@ -3,7 +3,7 @@ import React from 'react'
 const CartItem  = (props)=>{
 
 
-        let {title , price , qty,id } = props.product;  //object destructuring 
+        let {img,title , price , qty,id } = props.product;  //object destructuring 
         let {product , 
             increaseQuantity , 
             dicreaseQuantity , 
@@ -12,7 +12,7 @@ const CartItem  = (props)=>{
         return(
             <div className='cart-item'>
                 <div className='left-block'>
-                    <img style={styles.image} />
+                    <img style={styles.image} src={img}/>
                 </div>
                  <div className='right-block'>
                     <div style = { { fontSize : 25 } }>{title}</div>
