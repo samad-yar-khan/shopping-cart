@@ -24,8 +24,7 @@ class App extends React.Component {
     firebase
       .firestore()
       .collection('products')
-      .get()//this returns me a promise
-      .then((snapshot)=>{
+      .onSnapshot((snapshot)=>{
        
         
         //what we do now is that we fecth data from the firebase and set state here
