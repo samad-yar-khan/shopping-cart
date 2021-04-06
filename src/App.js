@@ -14,15 +14,15 @@ class App extends React.Component {
           loading : true
           
       }
-
+      this.db = firebase.firestore(); //we put this in the constrcutor because it will be used again and again to aceess the firestore
 
       //method 2 , we bind our functions to this (otherwise their 'this' value wull be uundefined when they are assigned to an event listenr or aany other var)
       // this.increaseQuantity = this.increaseQuantity.bind(this);
   }
 
   componentDidMount(){
-    firebase
-      .firestore()
+    
+    this.db
       .collection('products')
       .onSnapshot((snapshot)=>{
        
@@ -103,6 +103,23 @@ class App extends React.Component {
     return cost;
   }
 
+  addProduct=()=>{
+
+    this.db
+      .collection('products')
+      .add({ //add will returna  promise with ref to the addec document
+        img : '',
+        price :1000,
+        qty : 1,
+        title : "Washing Mashine"
+      }).then((docRef)=>{
+        console.log("NEW PRODUCT ADDED !" , docRef);
+      }).catch((err)=>{
+        console.log("ERROR ADDING NEW PRODUCT " , err);
+      })
+
+  }
+
     render(){
 
       const products  = this.state;
@@ -112,6 +129,7 @@ class App extends React.Component {
           <NavBar 
             count = {this.getCartCount()}
           />
+          {/* <button style = {{padding:10 , fontSize:10 , backgroundColor:"blue"}} onClick={this.addProduct}>ADD PRODUCT</button> */}
           <Cart 
             products = {products}
             increaseQuantity = {this.handleIncreaseQuantity}
