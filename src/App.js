@@ -48,14 +48,25 @@ class App extends React.Component {
 
   handleIncreaseQuantity = (product)=>{
 
-      let {products} = this.state;
-      let index = products.indexOf(product);
+    let {products} = this.state;
+    let index = products.indexOf(product);
       // console.log(product);
-      products[index].qty+=1;
+      // products[index].qty+=1;
 
-      this.setState({
-          products:products
-      });
+      // this.setState({
+      //     products:products
+      // });
+
+    let docRef = this.db.collection('products').doc(product.id);
+
+    docRef
+      .update({
+        qty : product.qty+1
+      }).then(()=>{
+        console.log("Product Updated !");
+      }).catch((err)=>{
+        console.log("error in updating product" , err);
+      })
 
   }
 
@@ -65,10 +76,22 @@ class App extends React.Component {
       let index = products.indexOf(product);
       // console.log(product);
     if(products[index].qty > 0){
-        products[index].qty -=1;
-        this.setState({
-          products:products
-      });
+      //   products[index].qty -=1;
+      //   this.setState({
+      //     products:products
+      // });
+
+      let docRef = this.db.collection('products').doc(product.id); //so we basicaly find a doc with the given id and try to uddate it
+
+      docRef
+        .update({
+          qty : product.qty - 1
+        }).then(()=>{
+          console.log("product qty decreased succesfully !");
+        }).catch((err)=>{
+          console.log("eroor in dicreasing product qty !" , err);
+        })
+
     }
     return;
   }
