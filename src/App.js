@@ -98,12 +98,22 @@ class App extends React.Component {
 
   handleDeleteProduct = (id)=>{
       
-      let {products} = this.state;
-      let  items = products.filter((item)=> item.id !== id); //this will basically filter out all those items whose id is not equal to the id of the item to be deleted
+      // let {products} = this.state;
+      // let  items = products.filter((item)=> item.id !== id); //this will basically filter out all those items whose id is not equal to the id of the item to be deleted
 
-      this.setState({
-          products : items
-      })
+      // this.setState({
+      //     products : items
+      // })
+      let docRef = this.db.collection('products').doc(id);
+
+      docRef
+        .delete()
+        .then(()=>{
+          console.log("Deleted item succesfully !");
+        }).catch((err)=>{
+          console.log("Error in deleting item !" , err);
+        })
+        
   }
 
   getCartCount=()=>{
@@ -131,7 +141,7 @@ class App extends React.Component {
     this.db
       .collection('products')
       .add({ //add will returna  promise with ref to the addec document
-        img : '',
+        img :'https://www.reliancedigital.in/medias/Kelvinator-KWT-A800SG-Washing-Machines-491604437-i-1-1200Wx1200H?context=bWFzdGVyfGltYWdlc3w5NTYzMXxpbWFnZS9qcGVnfGltYWdlcy9oNjkvaGIyLzkzMzUxNDAzODQ3OTguanBnfGRmN2MyYzI5ZTYxZjgwYTNjYTczMjk5ODgxNzNkYjVhZDY3MjRkYTkyOGUxYTFkYjNmOTIxYzZhYzIwMzM4ODM',
         price :1000,
         qty : 1,
         title : "Washing Mashine"
@@ -152,7 +162,7 @@ class App extends React.Component {
           <NavBar 
             count = {this.getCartCount()}
           />
-          {/* <button style = {{padding:10 , fontSize:10 , backgroundColor:"blue"}} onClick={this.addProduct}>ADD PRODUCT</button> */}
+          <button style = {{padding:10 , fontSize:10 , backgroundColor:"blue"}} onClick={this.addProduct}>ADD PRODUCT</button>
           <Cart 
             products = {products}
             increaseQuantity = {this.handleIncreaseQuantity}
