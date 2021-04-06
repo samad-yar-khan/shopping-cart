@@ -24,6 +24,9 @@ class App extends React.Component {
     
     this.db
       .collection('products')
+      .where('price' , '<' , 20000)
+      .where('price' , '>' , 1000)
+      .orderBy('price' , 'desc')
       .onSnapshot((snapshot)=>{
        
         
@@ -141,10 +144,10 @@ class App extends React.Component {
     this.db
       .collection('products')
       .add({ //add will returna  promise with ref to the addec document
-        img :'https://www.reliancedigital.in/medias/Kelvinator-KWT-A800SG-Washing-Machines-491604437-i-1-1200Wx1200H?context=bWFzdGVyfGltYWdlc3w5NTYzMXxpbWFnZS9qcGVnfGltYWdlcy9oNjkvaGIyLzkzMzUxNDAzODQ3OTguanBnfGRmN2MyYzI5ZTYxZjgwYTNjYTczMjk5ODgxNzNkYjVhZDY3MjRkYTkyOGUxYTFkYjNmOTIxYzZhYzIwMzM4ODM',
-        price :1000,
-        qty : 1,
-        title : "Washing Mashine"
+        img : 'https://in-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06970886.png',
+        price :95000,
+        qty : 0,
+        title : "Laptop"
       }).then((docRef)=>{
         console.log("NEW PRODUCT ADDED !" , docRef);
       }).catch((err)=>{
